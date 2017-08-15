@@ -20,7 +20,6 @@ class App extends Component {
     }
 
     handleChange({ name, value }) {
-        console.log('name is', name, 'value is', value);
         this.setState({
             [name]: value
         });

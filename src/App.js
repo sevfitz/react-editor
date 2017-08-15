@@ -12,12 +12,13 @@ class App extends Component {
         this.state = {
             message: props.initialMessage || 'Hello World',
             color: '#3fa846',
+            fontFamily: 'Helvetica',
             radio1: props.initialValue || 'Enter Label',
             radio2: props.initialValue || 'Enter Label',
             radio3: props.initialValue || 'Enter Label',
-            dropdown1: props.initialDrop || 'Type Dropdown Choice 1',
-            dropdown2: props.initialDrop || 'Type Dropdown Choice 2',
-            dropdown3: props.initialDrop || 'Type Dropdown Choice 3',
+            font1: props.initialDrop || 'Helvetica',
+            font2: props.initialDrop || 'Times New Roman',
+            font3: props.initialDrop || 'Verdana',
         };
     }
 
@@ -32,7 +33,6 @@ class App extends Component {
         const dropdownStyle = {
             width: '150px',
             color: '#781f91'
-
         };
 
         return (
@@ -50,13 +50,34 @@ class App extends Component {
                         <input name="color" value={this.state.color} type="color" onChange={({ target }) => this.handleChange(target)} />
                     </label>
                 </div>
+                
+                <br/>
+                <br/>
+                Font Choices:
+                <br/>
+                <input name="font1" style={dropdownStyle} value={this.state.font1} onChange={({ target }) => this.handleChange(target)} />
+                <br/>
+                <input name="font2" style={dropdownStyle} value={this.state.font2} onChange={({ target }) => this.handleChange(target)} />
+                <br/>
+                <input name="font3" style={dropdownStyle} value={this.state.font3} onChange={({ target }) => this.handleChange(target)} />
+                <br/>
+                <br/>
+                <select name="fontFamily" value={this.state.fontFamily} onChange={({ target }) => this.handleChange(target)}>
+                    <option value={this.state.font1}>{this.state.font1}</option>
+                    <option value={this.state.font2}>{this.state.font2}</option>
+                    <option value={this.state.font3}>{this.state.font3}</option>
+                </select> 
+                <br/>
+                <br/>
                 <div className="display" style={{
-                    color: this.state.color
+                    color: this.state.color,
+                    fontFamily: this.state.fontFamily,
+                    width: '500px',
+                    height: '200px',
+                    border: 'solid 1px black'
                 }}>
                     {this.state.message}
                 </div>
-                <br/>
-                <br/>
 
 
                 <div>
@@ -83,18 +104,6 @@ class App extends Component {
                     <br/>
 
 
-                    <input name="dropdown1" style={dropdownStyle} value={this.state.dropdown1} onChange={({ target }) => this.handleChange(target)} />
-                    <br/>
-                    <input name="dropdown2" style={dropdownStyle} value={this.state.dropdown2} onChange={({ target }) => this.handleChange(target)} />
-                    <br/>
-                    <input name="dropdown3" style={dropdownStyle} value={this.state.dropdown3} onChange={({ target }) => this.handleChange(target)} />
-                    <br/>
-                    <br/>
-                    <select>
-                        <option value="1">{this.state.dropdown1}</option>
-                        <option value="2">{this.state.dropdown2}</option>
-                        <option value="3">{this.state.dropdown3}</option>
-                    </select> 
 
 
                 </div>

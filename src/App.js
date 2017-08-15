@@ -13,16 +13,14 @@ class App extends Component {
             message: props.initialMessage || 'Hello World',
             color: '#3fa846',
             fontFamily: 'Helvetica',
-            radio1: props.initialValue || 'Enter Label',
-            radio2: props.initialValue || 'Enter Label',
-            radio3: props.initialValue || 'Enter Label',
-            font1: props.initialDrop || 'Helvetica',
-            font2: props.initialDrop || 'Times New Roman',
-            font3: props.initialDrop || 'Verdana',
+            fontWeight: 'normal',
+            fontSize: '1em',
+            border: 'solid 1px black'
         };
     }
 
     handleChange({ name, value }) {
+        console.log('name is', name, 'value is', value);
         this.setState({
             [name]: value
         });
@@ -34,6 +32,27 @@ class App extends Component {
             width: '150px',
             color: '#781f91'
         };
+        const weights = {
+            normal: 'normal',
+            lighter: 'lighter',
+            bolder: 'bolder'
+        };
+        const fonts = {
+            helvetica: 'Helvetica',
+            times: 'Times New Roman',
+            verdana: 'Verdana'
+        };
+        const sizes = {
+            reg: '1em',
+            big: '2em',
+            bigger: '6em'
+        };
+        const borders = {
+            reg: 'solid 1px black',
+            new: 'solid 2px blue',
+            odd: 'dashed 5px red'
+        };
+
 
         return (
             <div>
@@ -41,7 +60,7 @@ class App extends Component {
                 <div>
                     <label>
                         Message:
-                        <input name="message" value={this.state.message} onChange={({ target }) => this.handleChange(target)} />
+                        <input name="message" style={{ width:'300px' }} value={this.state.message} onChange={({ target }) => this.handleChange(target)} />
                     </label>
                     <br/>
                     <br/>
@@ -50,88 +69,90 @@ class App extends Component {
                         <input name="color" value={this.state.color} type="color" onChange={({ target }) => this.handleChange(target)} />
                     </label>
                 </div>
+
+
+                <br/>
+                <div>
+                  Default Font Choices:
+                    <br />
+                    <input name="font1" style={dropdownStyle} value={fonts.helvetica} onChange={({ target }) => this.handleChange(target)} />
+                    <br />
+                    <input name="font2" style={dropdownStyle} value={fonts.times} onChange={({ target }) => this.handleChange(target)} />
+                    <br />
+                    <input name="font3" style={dropdownStyle} value={fonts.verdana} onChange={({ target }) => this.handleChange(target)} />
+                    <br />
+                    <br />
+                  Select the font to display:
+                    <br />
+                    <select name="fontFamily" value={this.state.fontFamily} onChange={({ target }) => this.handleChange(target)}>
+                        <option value={fonts.helvetica}>{fonts.helvetica}</option>
+                        <option value={fonts.times}>{fonts.times}</option>
+                        <option value={fonts.verdana}>{fonts.verdana}</option>
+                    </select>
+                </div>
+                <br/>
+                <br/>
+
+
+                <div>
+                    Default Font Weights:
+                    <br/>
+                    <form>
+                        {weights.normal}
+                        <input type="radio" name="fontWeight" value={weights.normal} onClick={({ target }) => this.handleChange(target)} />
+                        {weights.lighter} 
+                        <input type="radio" name="fontWeight" value={weights.lighter} onClick={({ target }) => this.handleChange(target)}  />
+                        {weights.bolder} 
+                        <input type="radio" name="fontWeight" value={weights.bolder} onClick={({ target }) => this.handleChange(target)} />
+                    </form>
+                    <br/>
+                    <br/>
+                </div>
                 
-                <br/>
-                <br/>
-                Font Choices:
-                <br/>
-                <input name="font1" style={dropdownStyle} value={this.state.font1} onChange={({ target }) => this.handleChange(target)} />
-                <br/>
-                <input name="font2" style={dropdownStyle} value={this.state.font2} onChange={({ target }) => this.handleChange(target)} />
-                <br/>
-                <input name="font3" style={dropdownStyle} value={this.state.font3} onChange={({ target }) => this.handleChange(target)} />
-                <br/>
-                <br/>
-                <select name="fontFamily" value={this.state.fontFamily} onChange={({ target }) => this.handleChange(target)}>
-                    <option value={this.state.font1}>{this.state.font1}</option>
-                    <option value={this.state.font2}>{this.state.font2}</option>
-                    <option value={this.state.font3}>{this.state.font3}</option>
-                </select> 
-                <br/>
-                <br/>
+                <div>
+                    Default Font Sizes:
+                    <br/>
+                    <form>
+                        {sizes.reg}
+                        <input type="radio" name="fontSize" value={sizes.reg} onClick={({ target }) => this.handleChange(target)} />
+                        {sizes.big} 
+                        <input type="radio" name="fontSize" value={sizes.big} onClick={({ target }) => this.handleChange(target)}  />
+                        {sizes.bigger} 
+                        <input type="radio" name="fontSize" value={sizes.bigger} onClick={({ target }) => this.handleChange(target)} />
+                    </form>
+                    <br/>
+                    <br/>
+                </div>
+                
+                <div>
+                    Borders:
+                    <br/>
+                    <form>
+                        Regular border:
+                        <input type="radio" name="border" value={borders.reg} onClick={({ target }) => this.handleChange(target)} />
+                        New border:
+                        <input type="radio" name="border" value={borders.new} onClick={({ target }) => this.handleChange(target)}  />
+                        Odd border:
+                        <input type="radio" name="border" value={borders.odd} onClick={({ target }) => this.handleChange(target)} />
+                    </form>
+                    <br/>
+                    <br/>
+                </div>
                 <div className="display" style={{
                     color: this.state.color,
                     fontFamily: this.state.fontFamily,
+                    fontWeight: this.state.fontWeight,
                     width: '500px',
                     height: '200px',
-                    border: 'solid 1px black'
+                    border: this.state.border,
+                    fontSize: this.state.fontSize
                 }}>
                     {this.state.message}
                 </div>
 
-
-                <div>
-                    <label>
-                        <input name="radio1" value={this.state.radio1} onChange={({ target }) => this.handleChange(target)} />
-                        {this.state.radio1} 
-                    </label>
-                    <input type="radio" name="some-choices" value="choice" />
-                    <br/>
-                    <br/>
-                    <label>
-                        <input name="radio2" value={this.state.radio2} onChange={({ target }) => this.handleChange(target)} />
-                        {this.state.radio2} 
-                    </label>
-                    <input type="radio" name="some-choices" value="choice" />
-                    <br/>
-                    <br/>
-                    <label>
-                        <input name="radio3" value={this.state.radio3} onChange={({ target }) => this.handleChange(target)} />
-                        {this.state.radio3} 
-                    </label>
-                    <input type="radio" name="some-choices" value="choice" />
-                    <br/>
-                    <br/>
-
-
-
-
-                </div>
             </div>
         );
     }
 }
 
 export default App;
-
-// import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <div className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <h2>Welcome to React</h2>
-//         </div>
-//         <p className="App-intro">
-//           To get started, edit <code>src/App.js</code> and save to reload.
-//         </p>
-//       </div>
-//     );
-//   }
-// }
-
-
